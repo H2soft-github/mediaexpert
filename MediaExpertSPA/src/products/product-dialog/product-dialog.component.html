@@ -1,0 +1,55 @@
+<h1>Produkt</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="name">Nazwa</label>
+        <input id="name" class="form-control" placeholder="Wpisz nazwę" formControlName="name">
+        <div *ngIf="form.controls['name'].invalid && (form.controls['name'].dirty || form.controls['name'].touched)" class="alert">
+          <div *ngIf="form.controls['name'].errors?.required">
+            <app-message message="Nazwa jest wymagana." type="error"></app-message>
+          </div>
+          <div *ngIf="form.controls['name'].errors?.maxLength">
+            <app-message message="Nazwa jest zbyt długa." type="error"></app-message>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="code">Kod</label>
+        <input id="code" class="form-control" placeholder="Wpisz kod" formControlName="code">
+        <div *ngIf="form.controls['code'].invalid && (form.controls['code'].dirty || form.controls['code'].touched)" class="alert">
+          <div *ngIf="form.controls['code'].errors?.required">
+            <app-message message="Kod jest wymagany." type="error"></app-message>
+          </div>
+          <div *ngIf="form.controls['code'].errors?.maxLength">
+            <app-message message="Kod jest zbyt długi." type="error"></app-message>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="price">Cena (PLN)</label>
+        <input id="price" class="form-control" placeholder="Wpisz cenę" formControlName="price">
+        <div *ngIf="form.controls['price'].invalid && (form.controls['price'].dirty || form.controls['price'].touched)" class="alert">
+          <div *ngIf="form.controls['price'].errors?.required">
+            <app-message message="Cena jest wymagana." type="error"></app-message>
+          </div>
+          <div *ngIf="form.controls['price'].errors?.pattern">
+            <app-message message="Cena ma nieprawidłowy format (10,22)." type="error"></app-message>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-message [message]="errorMsg" type="error" *ngIf="errorMsg"></app-message>
+  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Zapisz</button>
+  &nbsp;
+  <button class="btn btn-primary" (click)="close()">Zamknij</button>
+</form>

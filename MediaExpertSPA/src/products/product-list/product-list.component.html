@@ -1,0 +1,39 @@
+<div class="product_list">
+  <h1>Produkty</h1>
+  <ng-container *ngIf="loaded">
+    <div class="product_list__button">
+      <button type="button" class="btn btn-primary" (click)="addNewProduct()">Add product</button>
+    </div>
+    <ng-container *ngIf="products.length > 0; else noProducts">
+      <table class="table">
+        <colgroup>
+          <col width="auto"/>
+          <col width="auto"/>
+          <col width="auto"/>
+          <col width="200px"/>
+        </colgroup>
+        <thead class="thead-dark">
+          <tr>
+            <th>Nazwa</th>
+            <th>Kod</th>
+            <th>Cena</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tr *ngFor="let product of products">
+          <td>{{product.name}}</td>
+          <td>{{product.code}}</td>
+          <td>{{product.price | number:'1.0-2'}}&nbsp;PLN</td>
+          <td>
+            <button type="button" class="btn btn-primary" (click)="editProduct(product)">Edytuj</button>
+            &nbsp;
+            <button type="button" class="btn btn-danger" (click)="deleteProduct(product)">Usuń</button>
+          </td>
+        </tr>
+      </table>
+    </ng-container>
+    <ng-template #noProducts>
+      <app-message message="Brak produktów." type="information"></app-message>
+    </ng-template>
+  </ng-container>
+</div>
